@@ -29,12 +29,12 @@ export interface VirtualKeyboardKeycap {
    * Command to perform when the keycap is pressed
    */
   command:
-    | string
-    | Selector
-    | string[]
-    | [string, any]
-    | [string, any, any]
-    | [string, any, any, any];
+  | string
+  | Selector
+  | string[]
+  | [string, any]
+  | [string, any, any]
+  | [string, any, any, any];
 
   /**
    * LaTeX fragment to insert when the keycap is pressed
@@ -60,7 +60,7 @@ export interface VirtualKeyboardKeycap {
    *    define the label.
    * - `shift`: a shift key
    * - `small`: display the label in a smaller size
-   * - `action`: an “action” keycap (for arrows, return, etc…)
+   * - `action`: an "action" keycap (for arrows, return, etc…)
    * - `separator w5`: a half-width blank used as a separator. Other widths
    *    include `w15` (1.5 width), `w20` (double width) and `w50` (five-wide,
    *    used for the space bar).
@@ -184,7 +184,8 @@ export type VirtualKeyboardName =
   | 'numeric'
   | 'symbols'
   | 'alphabetic'
-  | 'greek';
+  | 'greek'
+  | 'hebrew';
 
 /**
  * @category Virtual Keyboard
@@ -348,57 +349,57 @@ export type VirtualKeyboardMessageAction =
  */
 export type VirtualKeyboardMessage =
   | {
-      type: 'mathlive#virtual-keyboard-message';
-      // From proxy to VK
-      action: 'execute-command';
-      command: Selector | [Selector, ...any[]];
-    }
+    type: 'mathlive#virtual-keyboard-message';
+    // From proxy to VK
+    action: 'execute-command';
+    command: Selector | [Selector, ...any[]];
+  }
   | {
-      // From VK to proxy
-      type: 'mathlive#virtual-keyboard-message';
-      action: 'geometry-changed';
-      boundingRect: DOMRect;
-    }
+    // From VK to proxy
+    type: 'mathlive#virtual-keyboard-message';
+    action: 'geometry-changed';
+    boundingRect: DOMRect;
+  }
   | {
-      // From VK to proxy
-      type: 'mathlive#virtual-keyboard-message';
-      action: 'synchronize-proxy';
-      boundingRect: DOMRect;
-      alphabeticLayout?: AlphabeticKeyboardLayout;
-      layers: Record<string, string | Partial<VirtualKeyboardLayer>>;
-      layouts: Readonly<(string | VirtualKeyboardLayout)[]>;
-      editToolbar?: EditToolbarOptions;
-      setKeycap: { keycap: string; value: Partial<VirtualKeyboardKeycap> };
-      isShifted: boolean;
-    }
+    // From VK to proxy
+    type: 'mathlive#virtual-keyboard-message';
+    action: 'synchronize-proxy';
+    boundingRect: DOMRect;
+    alphabeticLayout?: AlphabeticKeyboardLayout;
+    layers: Record<string, string | Partial<VirtualKeyboardLayer>>;
+    layouts: Readonly<(string | VirtualKeyboardLayout)[]>;
+    editToolbar?: EditToolbarOptions;
+    setKeycap: { keycap: string; value: Partial<VirtualKeyboardKeycap> };
+    isShifted: boolean;
+  }
   | {
-      // From proxy to VK
-      type: 'mathlive#virtual-keyboard-message';
-      action: 'update-setting';
-      alphabeticLayout?: AlphabeticKeyboardLayout;
-      layers: Record<string, string | Partial<VirtualKeyboardLayer>>;
-      layouts: Readonly<(VirtualKeyboardName | VirtualKeyboardLayout)[]>;
-      editToolbar?: EditToolbarOptions;
-      setKeycap: { keycap: string; value: Partial<VirtualKeyboardKeycap> };
-    }
+    // From proxy to VK
+    type: 'mathlive#virtual-keyboard-message';
+    action: 'update-setting';
+    alphabeticLayout?: AlphabeticKeyboardLayout;
+    layers: Record<string, string | Partial<VirtualKeyboardLayer>>;
+    layouts: Readonly<(VirtualKeyboardName | VirtualKeyboardLayout)[]>;
+    editToolbar?: EditToolbarOptions;
+    setKeycap: { keycap: string; value: Partial<VirtualKeyboardKeycap> };
+  }
   | {
-      // From proxy to VK
-      type: 'mathlive#virtual-keyboard-message';
-      action: 'show' | 'hide';
-      animate?: boolean;
-    }
+    // From proxy to VK
+    type: 'mathlive#virtual-keyboard-message';
+    action: 'show' | 'hide';
+    animate?: boolean;
+  }
   | {
-      type: 'mathlive#virtual-keyboard-message';
-      action:
-        | 'connect'
-        | 'disconnect'
-        | 'proxy-created'
-        | 'focus'
-        | 'blur'
-        | 'update-state'
-        | 'update-toolbar';
-      // Omit<
-      //   VirtualKeyboardMessageAction,
-      //   'execute-command' | 'set-options'
-      // >;
-    };
+    type: 'mathlive#virtual-keyboard-message';
+    action:
+    | 'connect'
+    | 'disconnect'
+    | 'proxy-created'
+    | 'focus'
+    | 'blur'
+    | 'update-state'
+    | 'update-toolbar';
+    // Omit<
+    //   VirtualKeyboardMessageAction,
+    //   'execute-command' | 'set-options'
+    // >;
+  };
